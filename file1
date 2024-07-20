@@ -1,7 +1,0 @@
-#include "iostream.h"
-main()
-{
-int a;
-a=0;
-return 0;
-}
