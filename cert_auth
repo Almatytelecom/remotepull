@@ -1,0 +1,21 @@
+make a directory tree for ca
+
+run an admin root
+sudo -s
+
+cd /root						// go to /root
+mkdir /root/ca						//for directory tree of ca
+mkdir /root/ca/cert					//for issued certificates
+mkdir /root/ca/crl						//for revoked certificates
+mkdir /root/ca/csr						//for certificate requests
+mkdir /root/ca/private						//for private keys
+chmod 700 private						//set access only for root
+touch index.txt
+echo 1000 > serial
+
+generate private key for ca
+openssl genrsa -aes256 -out /root/ca/private/ca.key 4096	//generate private key 4096 bit length and with encryption aes256.  This key will use for generate main certificate of ca
+
+
+openssl req -config /root/ca/openssl.cnf -key /root/ca/private/ca.key -new -x509 -days 3650 -sha256 -extensions v3_ca -out /root/ca/certs/ca.crt
+
